@@ -6,6 +6,9 @@ package br.kge.eti.OSApiApplication.api.controller;
 
 import br.kge.eti.OSApiApplication.domain.model.OrdemServico;
 import br.kge.eti.OSApiApplication.domain.service.OrdemServicoService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import java.lang.reflect.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,6 +32,8 @@ public class OrdemServicoController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public OrdemServico criar(@RequestBody OrdemServico ordemServico) {
-      return ordemServicoService.criar(ordemServico);        
-    }
+      return ordemServicoService.criar(ordemServico);   
+    } 
+    
+ 
 }

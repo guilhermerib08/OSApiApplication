@@ -9,6 +9,9 @@ import br.kge.eti.OSApiApplication.domain.model.OrdemServico;
 import br.kge.eti.OSApiApplication.domain.repository.ClienteRepository;
 import br.kge.eti.OSApiApplication.domain.service.ClienteService;
 import br.kge.eti.OSApiApplication.domain.service.OrdemServicoService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import java.util.List;
 import java.util.Optional;
@@ -40,6 +43,12 @@ public class ClienteController {
     
     
     @GetMapping("/clientes")
+    
+@Operation(summary = "Buscar Clientes Existentes", description = "Retornar uma lista completa dos clientes")
+@ApiResponses(value = {
+ @ApiResponse(responseCode = "200", description = "Resgatado com Sucesso"),
+ @ApiResponse(responseCode = "404", description = "Não foi possível resgatar o produto")}) 
+    
     public ResponseEntity<List<Cliente>> buscarTodos() {
         List<Cliente> listaCliente = clienteRepository.findAll();
        
@@ -52,6 +61,13 @@ public class ClienteController {
     }
     
     @GetMapping("/clientes/{clienteID}")
+    
+    
+    
+@Operation(summary = "Buscar Clientes pelo ID", description = "Retorna os clientes pelo ID")
+@ApiResponses(value = {
+ @ApiResponse(responseCode = "200", description = "Resgatado com sucesso!"),
+ @ApiResponse(responseCode = "404", description = "Não encontrado - O produto não foi encontrado")})
     public ResponseEntity<Cliente> buscar(@PathVariable long clienteID) {
         
         Optional<Cliente> cliente = clienteRepository.findById(clienteID);
@@ -66,6 +82,12 @@ public class ClienteController {
         
         
         @PostMapping("/clientes")
+        
+        
+@Operation(summary = "Adcionar um Cliente", description = "Adciona um cliente")
+@ApiResponses(value = {
+ @ApiResponse(responseCode = "200", description = "Resgatado com Sucesso"),
+ @ApiResponse(responseCode = "404", description = "Não Encontrado")})
         @ResponseStatus(HttpStatus.CREATED)
         
         public Cliente adicionar(@Valid @RequestBody Cliente cliente) { 
@@ -74,6 +96,11 @@ public class ClienteController {
         
         }
         @PutMapping("/clientes{clienteID}")
+        
+@Operation(summary = "Atualizar um Cliente", description = "Atualiza o Status de um Cliente")
+@ApiResponses(value = {
+ @ApiResponse(responseCode = "200", description = "Resgatado com Sucesso"),
+ @ApiResponse(responseCode = "404", description = "Não Encontrado")})
         public ResponseEntity<Cliente> atualizar(@Valid @PathVariable Long clienteID,
                 @RequestBody Cliente cliente) {
          
@@ -85,6 +112,13 @@ public class ClienteController {
             return ResponseEntity.ok(cliente);
         }
         @DeleteMapping("/clientes/{clienteID}")
+        
+        
+@Operation(summary = "Get a product by id", description = "Returns a product as per the id")
+@ApiResponses(value = {
+ @ApiResponse(responseCode = "200", description = "Successfully retrieved"),
+ @ApiResponse(responseCode = "404", description = "Not found - The product was not found")})
+        
         public ResponseEntity<Void> excluir(@PathVariable Long clienteID) {
         
             if (!clienteRepository.existsById(clienteID)) {

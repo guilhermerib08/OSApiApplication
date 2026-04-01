@@ -4,6 +4,7 @@
  */
 package br.kge.eti.OSApiApplication.domain.model;
 
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -24,6 +25,7 @@ public class OrdemServico {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
     
     @ManyToOne
     private Cliente cliente;
